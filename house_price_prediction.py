@@ -1,5 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 #Data Loading
 df = pd.read_csv('train.csv')
@@ -85,3 +87,26 @@ print("\nTrain Data Shape:", X_train.shape)
 print("Test Data Shape:", X_test.shape)
 print("Train Target Shape:", y_train.shape)
 print("Test Target Shape:", y_test.shape)
+
+#REGRESSION MODELS
+
+#Linear Regression
+linear_model = LinearRegression()
+linear_model.fit(X_train, y_train)
+linear_predictions = linear_model.predict(X_test)
+print("\nLinear Regression Predictions:", linear_predictions[:10])
+print("\nActual Prices:", y_test.iloc[:10].values)
+print("\nPredicted Prices:", linear_predictions[:10])
+
+#Linear Regression Evaluation
+mae = mean_absolute_error(y_test, linear_predictions)
+rmse = mean_squared_error(
+    y_test,
+    linear_predictions
+) ** 0.5
+r2 = r2_score(y_test, linear_predictions)
+
+print("\nLINEAR REGRESSION - EVALUATION")
+print("Mean Absolute Error:", mae)
+print("Root Mean Squared Error:", rmse)
+print("R² Score:", r2)
