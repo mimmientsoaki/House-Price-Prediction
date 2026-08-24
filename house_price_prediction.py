@@ -4,6 +4,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.model_selection import cross_val_score
 
 #Data Loading
 df = pd.read_csv('train.csv')
@@ -101,17 +103,17 @@ print("\nLinear Regression Actual Prices:", y_test.iloc[:10].values)
 print("\nLinear Regression Predicted Prices:", linear_predictions[:10])
 
 #Linear Regression Evaluation
-mae = mean_absolute_error(y_test, linear_predictions)
-rmse = mean_squared_error(
+linear_mae = mean_absolute_error(y_test, linear_predictions)
+linear_rmse = mean_squared_error(
     y_test,
     linear_predictions
 ) ** 0.5
-r2 = r2_score(y_test, linear_predictions)
+linear_r2 = r2_score(y_test, linear_predictions)
 
 print("\nLINEAR REGRESSION - EVALUATION")
-print("Mean Absolute Error:", mae)
-print("Root Mean Squared Error:", rmse)
-print("R² Score:", r2)
+print("Mean Absolute Error:", linear_mae)
+print("Root Mean Squared Error:", linear_rmse)
+print("R² Score:", linear_r2)
 
 #Decision Tree Regression
 tree_model = DecisionTreeRegressor(
@@ -150,3 +152,71 @@ print("\nRANDOM FOREST - EVALUATION")
 print("Mean Absolute Error:", forest_mae)
 print("Root Mean Squared Error:", forest_rmse)
 print("R² Score:", forest_r2)
+
+#GRADIENT BOOSTING REGRESSION
+gradient_model = GradientBoostingRegressor(
+    n_estimators=100,
+    random_state=42
+)
+gradient_model.fit(X_train, y_train)
+gradient_predictions = gradient_model.predict(X_test)
+print("\nGradient Boosting Predictions:", gradient_predictions[:10])
+print("\nGradient Boosting Actual Prices:", y_test.iloc[:10].values)
+
+gradient_mae = mean_absolute_error(y_test,gradient_predictions)
+gradient_rmse = mean_squared_error(y_test,gradient_predictions) ** 0.5
+gradient_r2 = r2_score(y_test,gradient_predictions)
+
+print("\nGRADIENT BOOSTING - EVALUATION")
+print("Mean Absolute Error:", gradient_mae)
+print("Root Mean Squared Error:", gradient_rmse)
+print("R² Score:", gradient_r2)
+
+#CROSS-VALIDATION
+gradient_cv_scores = cross_val_score(
+    gradient_model,
+    X,
+    y,
+    cv=5,
+    scoring="r2"
+)
+
+print("\nGRADIENT BOOSTING - CROSS-VALIDATION")
+print("R² Scores:", gradient_cv_scores)
+print("Average R²:", gradient_cv_scores.mean())
+
+
+# MODEL SCOREBOARD
+print("\nMODEL SCOREBOARD")
+model_results = pd.DataFrame({
+    "Model": [
+        "Linear Regression",
+        "Decision Tree",
+        "Random Forest",
+        "Gradient Boosting"
+    ],
+    
+    "MAE": [
+        linear_mae,
+        tree_mae,
+        forest_mae,
+        gradient_mae
+    ],
+    
+    "RMSE": [
+        linear_rmse,
+        tree_rmse,
+        forest_rmse,
+        gradient_rmse
+    ],
+    
+    "R2": [
+        linear_r2,
+        tree_r2,
+        forest_r2,
+        gradient_r2
+    ]
+})
+
+print("\nMODEL SCOREBOARD")
+print(model_results)
