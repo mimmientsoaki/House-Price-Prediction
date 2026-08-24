@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.tree import DecisionTreeRegressor
 
 #Data Loading
 df = pd.read_csv('train.csv')
@@ -110,3 +111,22 @@ print("\nLINEAR REGRESSION - EVALUATION")
 print("Mean Absolute Error:", mae)
 print("Root Mean Squared Error:", rmse)
 print("R² Score:", r2)
+
+#Decision Tree Regression
+tree_model = DecisionTreeRegressor(
+    random_state=42
+)
+
+tree_model.fit(X_train, y_train)
+tree_predictions = tree_model.predict(X_test)
+print("\nDecision Tree Predictions:", tree_predictions[:10])
+print("\nActual Prices:", y_test.iloc[:10].values)
+
+tree_mae = mean_absolute_error(y_test,tree_predictions)
+tree_rmse = mean_squared_error(y_test,tree_predictions) ** 0.5
+tree_r2 = r2_score(y_test,tree_predictions)
+
+print("\nDECISION TREE - EVALUATION")
+print("Mean Absolute Error:", tree_mae)
+print("Root Mean Squared Error:", tree_rmse)
+print("R² Score:", tree_r2)
