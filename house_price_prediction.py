@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 #Data Loading
 df = pd.read_csv('train.csv')
@@ -96,8 +97,8 @@ linear_model = LinearRegression()
 linear_model.fit(X_train, y_train)
 linear_predictions = linear_model.predict(X_test)
 print("\nLinear Regression Predictions:", linear_predictions[:10])
-print("\nActual Prices:", y_test.iloc[:10].values)
-print("\nPredicted Prices:", linear_predictions[:10])
+print("\nLinear Regression Actual Prices:", y_test.iloc[:10].values)
+print("\nLinear Regression Predicted Prices:", linear_predictions[:10])
 
 #Linear Regression Evaluation
 mae = mean_absolute_error(y_test, linear_predictions)
@@ -120,7 +121,7 @@ tree_model = DecisionTreeRegressor(
 tree_model.fit(X_train, y_train)
 tree_predictions = tree_model.predict(X_test)
 print("\nDecision Tree Predictions:", tree_predictions[:10])
-print("\nActual Prices:", y_test.iloc[:10].values)
+print("\nDecision Tree Actual Prices:", y_test.iloc[:10].values)
 
 tree_mae = mean_absolute_error(y_test,tree_predictions)
 tree_rmse = mean_squared_error(y_test,tree_predictions) ** 0.5
@@ -130,3 +131,22 @@ print("\nDECISION TREE - EVALUATION")
 print("Mean Absolute Error:", tree_mae)
 print("Root Mean Squared Error:", tree_rmse)
 print("R² Score:", tree_r2)
+
+#RANDOM FOREST REGRESSION 🌲🌲🌲
+forest_model = RandomForestRegressor(
+    n_estimators=100,
+    random_state=42
+)
+forest_model.fit(X_train, y_train)
+forest_predictions = forest_model.predict(X_test)
+print("\nRandom Forest Predictions:", forest_predictions[:10])
+print("\n Random ForestActual Prices:", y_test.iloc[:10].values)
+
+forest_mae = mean_absolute_error(y_test,forest_predictions)
+forest_rmse = mean_squared_error(y_test,forest_predictions) ** 0.5
+forest_r2 = r2_score(y_test,forest_predictions)
+
+print("\nRANDOM FOREST - EVALUATION")
+print("Mean Absolute Error:", forest_mae)
+print("Root Mean Squared Error:", forest_rmse)
+print("R² Score:", forest_r2)
