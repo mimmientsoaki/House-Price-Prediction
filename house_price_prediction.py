@@ -220,3 +220,19 @@ model_results = pd.DataFrame({
 
 print("\nMODEL SCOREBOARD")
 print(model_results)
+
+#MODEL INTERPRETATION
+feature_importance = gradient_model.feature_importances_
+print("\nNumber of Feature Importances:", len(feature_importance))
+feature_importance_df = pd.DataFrame({
+    "Feature": X_train.columns,
+    "Importance": feature_importance
+})
+
+feature_importance_df = feature_importance_df.sort_values(
+    by="Importance",
+    ascending=False
+)
+print("\nTop 10 Most Important Features:")
+print(feature_importance_df.head(10))
+
