@@ -1,0 +1,61 @@
+==========================================
+HOUSE PRICE PREDICTION - ANALYSIS
+==========================================
+
+💰 Sale Price Distribution
+
+From the plot:
+Most houses have sale prices concentrated toward the lower-to-middle price range.
+There are fewer houses with very high sale prices.
+The distribution is right-skewed, meaning the higher-priced houses extend further to the right.
+There are some very expensive houses that may be considered potential outliers.
+This suggests that SalePrice is not evenly distributed across the dataset.
+
+"The distribution of SalePrice is right-skewed, with most houses 
+concentrated between approximately R100,000 and R250,000. 
+A smaller number of properties have substantially higher sale prices, 
+resulting in a long right-hand tail."
+
+⭐ Overall Quality vs Sale Price
+
+From the plot:
+Houses with lower Overall Quality scores generally have lower sale prices.
+As Overall Quality increases, the sale price generally increases.
+Houses with quality scores around 8–10 include many of the highest-priced properties.
+Houses with the same quality score can still have different sale prices, showing that other features also influence price.
+Overall, OverallQual appears to have a strong positive relationship with SalePrice.
+
+The scatter plot indicates a positive relationship between Overall Quality 
+and Sale Price. Higher-quality houses generally have higher sale prices, 
+suggesting that Overall Quality is an important predictor of house prices.
+However, the variation in sale prices at each quality level indicates that
+ other housing characteristics also influence the final sale price.
+
+🏠 Living Area vs Sale Price
+
+From the plot:
+Houses with smaller above-ground living areas generally have lower sale prices.
+As living area increases, the sale price generally increases.
+Houses with living areas above approximately 3,000 square feet include many of the higher-priced properties.
+There are some houses with very large living areas but comparatively lower prices, which may indicate potential outliers.
+Overall, GrLivArea shows a positive relationship with SalePrice, although other factors also affect the selling price.
+
+The scatter plot shows a positive relationship between above-ground living
+ area and house sale price. Generally, larger houses tend to have higher 
+ sale prices. However, the variation in prices among houses with similar 
+ living areas suggests that other factors also contribute to house prices.
+  A few observations with unusually large living areas may also represent
+   potential outliers.
+
+🏗️ Year Built vs Sale Price
+
+From the plot:
+Older houses, especially those built around the late 1800s–early 1900s, are mostly at the lower end of the price range.
+As the Year Built increases, the sale prices generally increase.
+Houses built around the 1980s–2000s include many of the higher-priced properties.
+There is still variation, meaning age alone doesn't determine the price.
+
+The scatter plot indicates a positive relationship between the year a 
+house was built and its sale price. Generally, newer houses tend to have 
+higher sale prices than older houses. However, considerable variation 
+exists, indicating that other factors also contribute to house prices.
