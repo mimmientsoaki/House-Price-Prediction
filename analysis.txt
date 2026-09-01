@@ -59,3 +59,78 @@ The scatter plot indicates a positive relationship between the year a
 house was built and its sale price. Generally, newer houses tend to have 
 higher sale prices than older houses. However, considerable variation 
 exists, indicating that other factors also contribute to house prices.
+
+📊 Actual vs Predicted House Sale Prices
+From the plot:
+
+Most of the points are close to the diagonal reference line, indicating that the predicted prices are generally close to the actual sale prices.
+The model performs particularly well for houses with lower to mid-range sale prices, where most observations are concentrated.
+As the actual sale price increases, the points become more spread out, showing that prediction errors increase for some higher-priced houses.
+Several expensive houses are below the reference line, meaning the model underestimates their sale prices.
+The house with an actual price around R750,000 is predicted at approximately R630,000, showing a noticeable underprediction.
+Overall, the strong alignment of the points with the reference line supports the high R² score of 0.897 obtained from the Gradient Boosting model.
+
+The Actual vs Predicted plot shows that the Gradient Boosting model produces predictions that generally follow the actual house sale prices. 
+Most observations are located close to the reference line, indicating relatively accurate predictions. However, the model shows larger errors for some high-priced properties and tends to underestimate several expensive houses. Overall, the close alignment between actual and predicted values indicates good predictive performance.
+
+📊 Top 10 Features for House Price Prediction
+
+From the plot:
+OverallQual is the most important feature for predicting house sale prices, indicating that the overall quality of a house has a strong influence on its predicted price.
+GrLivArea is the second most important feature, showing that the above-ground living area plays a significant role in determining house prices.
+GarageCars is also an important predictor, suggesting that garage capacity contributes to the estimated value of a property.
+BsmtFinSF1 and TotalBsmtSF indicate that finished and total basement areas have a noticeable influence on house prices.
+1stFlrSF and 2ndFlrSF show that the size of the living space across different floors contributes to the model's predictions.
+YearBuilt is among the important features, suggesting that the age of a property influences its predicted sale price.
+LotArea also contributes to the prediction, indicating that larger plots of land can be associated with higher house prices.
+FullBath appears among the top features, showing that the number of full bathrooms also contributes to the predicted house value.
+
+Overall, the feature-importance plot shows that **property quality, living space, garage capacity, basement area, and property age** are among the most influential factors used by the model to predict house sale prices.
+The results suggest that the model relies heavily on both **property characteristics and physical size** when estimating house prices. In particular, the high importance of **OverallQual** and **GrLivArea** indicates that the quality and usable living space of a property are particularly strong predictors of its sale price.
+
+
+📊 Residual Analysis – Gradient Boosting Model
+
+From the plot:
+* The residuals are distributed around the **zero reference line**, indicating that the Gradient Boosting model does not consistently overestimate or underestimate house prices across all predictions.
+* Most of the residuals appear to be concentrated relatively close to zero, suggesting that the model produces reasonably accurate predictions for many properties.
+* Some observations have **large positive residuals**, indicating that the actual sale price was considerably higher than the predicted price. This means the model underestimated some house prices.
+* There are also **negative residuals**, showing that the model overestimated the sale price for some properties.
+* The spread of the residuals becomes larger for some higher predicted house prices. This suggests that the model has more difficulty producing precise predictions for certain expensive properties.
+* There is no obvious strong curved or systematic pattern in the residuals, which is a positive indication that the model is capturing the main relationships between the features and house prices.
+
+Overall, the residual analysis indicates that the **Gradient Boosting model performs well**, with errors generally distributed around zero. However, the larger residuals for some higher-priced properties suggest that the model could still be improved when predicting expensive houses.
+
+
+🏆 FINAL MODEL SELECTION
++-------------------+-----------+-----------+--------+
+| Model             |       MAE |      RMSE |     R² |
++-------------------+-----------+-----------+--------+
+| Linear Regression | 23,922.63 | 83,010.70 | 0.1016 |
+| Decision Tree     | 28,081.35 | 43,510.70 | 0.7532 |
+| Random Forest     | 17,696.58 | 29,186.38 | 0.8889 |
+| Gradient Boosting | 17,780.52 | 28,083.49 | 0.8972 |
++-------------------+-----------+-----------+--------+
+
+What this means
+Gradient Boosting has the highest R² (0.8972) → it explains approximately 89.7% of the variation in house sale prices.
+It also has the lowest RMSE (28,083.49) → overall, it has the smallest squared prediction error.
+Random Forest has a slightly lower MAE (17,696.58 vs 17,780.52), meaning its average absolute error is slightly smaller.
+However, Gradient Boosting performs better overall based on R² and RMSE, and its cross-validation R² of 0.8894 shows that its performance is reasonably consistent across different subsets of the data.
+
+Therefore, Gradient Boosting was selected as the final model, as it performed well overall for this house price prediction project.**
+
+
+🏁 FINAL CONCLUSION & RECOMMENDATIONS
+Final Conclusion
+
+The house price prediction project successfully used machine learning to predict house sale prices based on property characteristics. 
+The dataset contained **1,460 houses and 81 features**. The data was cleaned, missing values were handled, and categorical variables were converted into numerical values before training the models.
+
+Four machine learning models were evaluated: **Linear Regression, Decision Tree, Random Forest, and Gradient Boosting**.
+
+Among the models tested, **Gradient Boosting achieved the best overall performance**, with an **R² score of 0.8972**, an **RMSE of 28,083.49**, and an average cross-validation R² score of **0.8894**.
+
+The feature importance analysis showed that **OverallQual, GrLivArea, GarageCars, BsmtFinSF1, and TotalBsmtSF** were among the most important features used by the model when predicting house prices.
+
+Overall, the results demonstrate that machine learning can effectively identify patterns in housing data and provide reasonably accurate house price predictions.

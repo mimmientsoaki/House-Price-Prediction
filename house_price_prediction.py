@@ -304,3 +304,63 @@ plt.ylabel('Sale Price')
 plt.title('Year Built vs House Sale Price')
 plt.show()
 
+
+# ==========================================
+# 4. MODEL PREDICTIONS: ACTUAL VS PREDICTED
+# ==========================================
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, gradient_predictions)
+plt.xlabel('Actual Sale Price')
+plt.ylabel('Predicted Sale Price')
+plt.title('Actual vs Predicted House Sale Prices')
+# Reference line
+plt.plot(
+    [y_test.min(), y_test.max()],
+    [y_test.min(), y_test.max()]
+)
+plt.show()
+
+# ==========================================
+# 5. FEATURE IMPORTANCE
+# ==========================================
+
+# Get feature importance from the Gradient Boosting model
+feature_importance = pd.DataFrame({
+    'Feature': X.columns,
+    'Importance': gradient_model.feature_importances_
+})
+
+# Sort by importance and select the top 10
+top_features = feature_importance.sort_values(
+    by='Importance',
+    ascending=False
+).head(10)
+
+# Plot Top 10 Features
+plt.figure(figsize=(10, 6))
+
+plt.barh(
+    top_features['Feature'],
+    top_features['Importance']
+)
+
+plt.xlabel('Importance')
+plt.ylabel('Feature')
+plt.title('Top 10 Features for House Price Prediction')
+plt.gca().invert_yaxis()
+plt.show()
+
+# ==========================================
+# 6. RESIDUAL ANALYSIS
+# ==========================================
+
+# Calculate residuals
+residuals = y_test - gradient_predictions
+plt.figure(figsize=(8, 6))
+plt.scatter(gradient_predictions, residuals)
+# Reference line at zero
+plt.axhline(y=0, linestyle='--')
+plt.xlabel('Predicted Sale Price')
+plt.ylabel('Residuals')
+plt.title('Residual Analysis - Gradient Boosting Model')
+plt.show()
